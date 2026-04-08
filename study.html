@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-Cards — Study</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Back</a>
+    <span class="nav-title" id="nav-set-name"></span>
+    <span class="nav-counter" id="nav-counter"></span>
+  </div>
+</nav>
+
+<div class="study-container">
+  <!-- Session progress bar -->
+  <div class="session-progress-bar">
+    <div class="session-progress-fill" id="session-bar" style="width:0%"></div>
+  </div>
+
+  <!-- Card study area -->
+  <div id="study-area" style="width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;">
+    <div class="card-scene" id="card-scene">
+      <div class="flip-card" id="flip-card">
+        <div class="card-face card-front" id="card-front">
+          <div class="card-word" id="front-text"></div>
+          <div class="card-hint" id="front-hint"></div>
+          <div class="card-flip-prompt">Tap to reveal</div>
+        </div>
+        <div class="card-face card-back" id="card-back">
+          <div class="card-translation" id="back-text"></div>
+          <div class="card-original" id="back-original"></div>
+          <div class="response-buttons">
+            <button class="btn btn-danger btn-lg" id="btn-dont-know">✗ Don't Know</button>
+            <button class="btn btn-success btn-lg" id="btn-know">✓ Know</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All caught up view -->
+  <div id="caught-up" class="caught-up" hidden>
+    <div class="icon-big">🎉</div>
+    <h2>All caught up!</h2>
+    <p id="caught-up-msg">No cards are due for review right now.</p>
+    <a href="index.html" class="btn btn-primary">Back to Home</a>
+  </div>
+
+  <!-- Session complete view -->
+  <div id="session-complete" class="session-complete" hidden>
+    <div style="font-size:3rem;margin-bottom:12px">🏆</div>
+    <h2>Session Complete!</h2>
+    <p class="subtitle">Great work on finishing this round.</p>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-num" id="stat-known">0</div>
+        <div class="stat-label">Known</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-unknown" style="color:var(--color-danger)">0</div>
+        <div class="stat-label">Learning</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-total">0</div>
+        <div class="stat-label">Total Cards</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-accuracy" style="color:var(--color-success)">0%</div>
+        <div class="stat-label">Accuracy</div>
+      </div>
+    </div>
+    <div class="session-complete-actions">
+      <button class="btn btn-primary btn-lg" id="btn-study-again">Study Again</button>
+      <a href="index.html" class="btn btn-ghost">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/sm2.js"></script>
+<script src="js/study.js"></script>
+</body>
+</html>

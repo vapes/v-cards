@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-Cards — Edit Set</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Back</a>
+    <span class="nav-title" id="nav-title">New Card Set</span>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header" style="padding-top:24px">
+    <h1 id="page-title">New Card Set</h1>
+  </div>
+
+  <form id="edit-form">
+    <div class="form-group">
+      <label for="input-name">Set Name</label>
+      <input type="text" id="input-name" placeholder="e.g. Spanish Basics" required autocomplete="off">
+    </div>
+
+    <div class="form-group">
+      <label>Card JSON</label>
+      <div class="json-toolbar">
+        <button type="button" class="btn btn-primary btn-sm" id="btn-copy-prompt">📋 Copy AI Prompt</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-validate">✓ Validate JSON</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-clear">Clear</button>
+      </div>
+      <textarea id="input-json" placeholder='Paste your AI-generated JSON here...&#10;&#10;Example:&#10;{&#10;  "name": "Spanish Basics",&#10;  "cards": [&#10;    { "front": "Hello", "back": "Hola", "hint": "greeting" }&#10;  ]&#10;}'></textarea>
+      <div id="json-feedback" class="json-feedback"></div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-ghost" id="btn-cancel">Cancel</button>
+      <button type="submit" class="btn btn-primary" id="btn-save">Save Set</button>
+    </div>
+  </form>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+
+<!-- Clipboard fallback modal -->
+<div id="modal-prompt" class="modal-backdrop" hidden>
+  <div class="modal-box" style="max-width:560px">
+    <h2>AI Prompt</h2>
+    <p style="margin-bottom:12px">Copy the text below and paste it into your AI assistant:</p>
+    <textarea id="prompt-text" rows="14" style="width:100%;font-size:.8rem;resize:vertical" readonly></textarea>
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="btn btn-ghost" id="modal-prompt-close">Close</button>
+      <button class="btn btn-primary" id="modal-select-all">Select All</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/sm2.js"></script>
+<script src="js/edit.js"></script>
+</body>
+</html>

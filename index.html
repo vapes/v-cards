@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-Cards — Flashcard Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand"><span class="icon">🃏</span> V-Cards</span>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <h1>My Card Sets</h1>
+    <button class="btn btn-primary" id="btn-new-set">+ New Set</button>
+  </div>
+
+  <div id="sets-list" class="sets-list"></div>
+
+  <div id="empty-state" class="empty-state" hidden>
+    <div class="icon-big">📚</div>
+    <h2>No card sets yet</h2>
+    <p>Create your first card set using an AI-generated JSON.</p>
+    <button class="btn btn-primary" id="btn-new-set-empty">+ Create First Set</button>
+  </div>
+</main>
+
+<div id="modal-confirm" class="modal-backdrop" hidden>
+  <div class="modal-box">
+    <h2>Delete Card Set?</h2>
+    <p>This will permanently delete the set and all its progress. This cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+      <button class="btn btn-danger" id="modal-confirm-btn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/storage.js"></script>
+<script src="js/sm2.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
