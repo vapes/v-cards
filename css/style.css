@@ -469,18 +469,33 @@ textarea { font-family: 'Courier New', monospace; font-size: .88rem; min-height:
 .session-progress-bar {
   width: 100%;
   max-width: 720px;
-  height: 4px;
+  height: 8px;
   background: var(--color-border);
   border-radius: 99px;
   margin-bottom: 32px;
   overflow: hidden;
+  display: flex;
+  gap: 2px;
 }
 
-.session-progress-fill {
+.session-progress-bar.has-segments {
+  background: transparent;
+}
+
+.progress-seg {
+  flex: 1;
   height: 100%;
-  background: var(--color-primary);
   border-radius: 99px;
-  transition: width .4s ease;
+  animation: segPop .2s ease;
+}
+
+.progress-seg.known     { background: var(--color-success); }
+.progress-seg.unknown   { background: var(--color-danger); }
+.progress-seg.remaining { background: var(--color-border); }
+
+@keyframes segPop {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
 }
 
 /* 3D Flip Card */

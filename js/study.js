@@ -7,6 +7,7 @@
   let currentCardId = null;
   let isFlipped = false;
   let sessionResults = { known: 0, dontKnow: 0 };
+  let sessionAnswers = []; // 'known' | 'unknown' per answered card
   let animating = false;
   let swapped = false;
 
@@ -31,9 +32,26 @@
   }
 
   function updateSessionBar() {
-    const done = originalQueueLength - queue.length;
-    const pct = originalQueueLength > 0 ? Math.round((done / originalQueueLength) * 100) : 0;
-    document.getElementById('session-bar').style.width = pct + '%';
+    const bar = document.getElementById('session-bar');
+    const total = originalQueueLength;
+    if (total === 0) return;
+
+    const answered = sessionAnswers.length;
+    const remaining = total - answered;
+
+    bar.innerHTML = '';
+    bar.classList.toggle('has-segments', answered > 0);
+
+    for (const result of sessionAnswers) {
+      const seg = document.createElement('div');
+      seg.className = `progress-seg ${result}`;
+      bar.appendChild(seg);
+    }
+    for (let i = 0; i < remaining; i++) {
+      const seg = document.createElement('div');
+      seg.className = 'progress-seg remaining';
+      bar.appendChild(seg);
+    }
   }
 
   function showCard(cardId) {
@@ -75,6 +93,7 @@
     progressMap[currentCardId] = updated;
     Storage.saveProgress(setId, currentCardId, updated);
     sessionResults.known += 1;
+    sessionAnswers.push('known');
     nextCard();
   }
 
@@ -85,6 +104,7 @@
     progressMap[currentCardId] = updated;
     Storage.saveProgress(setId, currentCardId, updated);
     sessionResults.dontKnow += 1;
+    sessionAnswers.push('unknown');
 
     // Re-insert in back third of remaining queue
     const insertAt = queue.length > 2
@@ -107,7 +127,7 @@
   function showSessionComplete() {
     document.getElementById('study-area').hidden = true;
     document.getElementById('session-complete').hidden = false;
-    document.getElementById('session-bar').style.width = '100%';
+    updateSessionBar();
 
     const total = sessionResults.known + sessionResults.dontKnow;
     const accuracy = total > 0 ? Math.round((sessionResults.known / total) * 100) : 0;
@@ -137,6 +157,7 @@
   function startSession() {
     // Reset state
     sessionResults = { known: 0, dontKnow: 0 };
+    sessionAnswers = [];
     document.getElementById('session-complete').hidden = true;
     document.getElementById('caught-up').hidden = true;
     document.getElementById('study-area').hidden = false;
