@@ -8,6 +8,7 @@
   let isFlipped = false;
   let sessionResults = { known: 0, dontKnow: 0 };
   let animating = false;
+  let swapped = false;
 
   function getParam(name) {
     return new URLSearchParams(window.location.search).get(name);
@@ -43,10 +44,14 @@
     const card = getCardById(cardId);
     if (!card) return;
 
-    document.getElementById('front-text').textContent = card.front;
-    document.getElementById('front-hint').textContent = card.hint || '';
-    document.getElementById('back-text').textContent = card.back;
-    document.getElementById('back-original').textContent = card.front;
+    const frontText = swapped ? card.back : card.front;
+    const backText  = swapped ? card.front : card.back;
+    const hint      = swapped ? '' : (card.hint || '');
+
+    document.getElementById('front-text').textContent = frontText;
+    document.getElementById('front-hint').textContent = hint;
+    document.getElementById('back-text').textContent = backText;
+    document.getElementById('back-original').textContent = frontText;
 
     const flipCard = document.getElementById('flip-card');
     flipCard.classList.remove('is-flipped');
@@ -177,6 +182,14 @@
 
     document.getElementById('btn-study-again').addEventListener('click', () => {
       startSession();
+    });
+
+    document.getElementById('btn-swap').addEventListener('click', () => {
+      swapped = !swapped;
+      const btn = document.getElementById('btn-swap');
+      btn.classList.toggle('is-active', swapped);
+      // Re-render current card without flipping
+      if (currentCardId) showCard(currentCardId);
     });
 
     // Keyboard shortcuts

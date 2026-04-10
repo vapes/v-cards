@@ -375,6 +375,53 @@ textarea { font-family: 'Courier New', monospace; font-size: .88rem; min-height:
   to { transform: translateX(0); opacity: 1; }
 }
 
+/* ===== Topic textarea (step 1) ===== */
+.topic-textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* ===== Swap toggle ===== */
+.swap-toggle-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.swap-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  touch-action: manipulation;
+}
+
+.swap-toggle:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.swap-toggle.is-active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.swap-icon { font-size: 1rem; }
+
 /* ===== Wizard / Instruction Card ===== */
 .instruction-card {
   background: var(--color-surface);

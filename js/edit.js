@@ -121,10 +121,10 @@ Requirements:
         document.getElementById('prompt-fallback-text').value = prompt;
       }
 
-      // Pre-fill set name from topic
+      // Pre-fill set name from first line of topic
       if (topic) {
         const nameInput = document.getElementById('input-name');
-        if (!nameInput.value.trim()) nameInput.value = topic;
+        if (!nameInput.value.trim()) nameInput.value = topic.split('\n')[0].replace(/^[•\-\*]\s*/, '').trim();
       }
     });
 
