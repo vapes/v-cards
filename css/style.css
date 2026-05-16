@@ -412,7 +412,6 @@ textarea { font-family: 'Courier New', monospace; font-size: .88rem; min-height:
 
 .flip-card {
   width: 100%;
-  min-height: 260px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform .5s cubic-bezier(.4,0,.2,1);
@@ -427,8 +426,8 @@ textarea { font-family: 'Courier New', monospace; font-size: .88rem; min-height:
 }
 
 .card-face {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  min-height: 260px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: var(--radius);
@@ -446,6 +445,9 @@ textarea { font-family: 'Courier New', monospace; font-size: .88rem; min-height:
 }
 
 .card-back {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
   background: var(--color-surface);
   color: var(--color-text);
   transform: rotateY(180deg);

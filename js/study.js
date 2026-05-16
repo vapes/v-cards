@@ -38,18 +38,31 @@
   function showCard(cardId) {
     currentCardId = cardId;
     isFlipped = false;
-    animating = false;
 
     const card = getCardById(cardId);
     if (!card) return;
 
+    const flipCardEl = document.getElementById('flip-card');
+    const wasFlipped = flipCardEl.classList.contains('is-flipped');
+
+    // Front face is invisible while card is flipped — safe to update immediately
     document.getElementById('front-text').textContent = card.front;
     document.getElementById('front-hint').textContent = card.hint || '';
-    document.getElementById('back-text').textContent = card.back;
-    document.getElementById('back-original').textContent = card.front;
 
-    const flipCard = document.getElementById('flip-card');
-    flipCard.classList.remove('is-flipped');
+    if (wasFlipped) {
+      animating = true;
+      flipCardEl.classList.remove('is-flipped');
+      // Update back content only after flip-back animation completes (back face invisible)
+      setTimeout(() => {
+        document.getElementById('back-text').textContent = card.back;
+        document.getElementById('back-original').textContent = card.front;
+        animating = false;
+      }, 520);
+    } else {
+      document.getElementById('back-text').textContent = card.back;
+      document.getElementById('back-original').textContent = card.front;
+      animating = false;
+    }
 
     updateNavCounter();
     updateSessionBar();
